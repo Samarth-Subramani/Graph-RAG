@@ -9,10 +9,10 @@ from translator import translate_to_english
 from chunk import chunk_text_by_tokens
 from extractor import extract_triplets
 
-local_model_path = "/home/vault/iwia/iwia125h/models/mistral-7b"
+local_model_path = ".........."
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.3"
-INPUT_DIR = "/home/hpc/iwia/iwia125h/final_data"
-OUTPUT_DIR = "exp_graph_csv"
+INPUT_DIR = "....../final_data"
+OUTPUT_DIR = "graph_csv"
 MAX_INPUT_TOKENS = 6000
 MAX_NEW_TOKENS = 1024
 CHUNK_BUFFER = 512
