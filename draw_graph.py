@@ -47,7 +47,6 @@ def draw_graph(graph, max_label_length=200):
         bbox=dict(boxstyle="round,pad=0.08", fc="white", ec="none", alpha=0.5)
     )
 
-    # No legend for one type
     if len(node_types) > 1:
         handles = [mpatches.Patch(color=color_map.get(t, "#8ecae6"), label=t.title()) for t in sorted(node_types)]
         plt.legend(handles=handles, loc='lower left', frameon=True, fontsize=9)
