@@ -20,5 +20,5 @@ def translate_to_english(text, chunk_size=CHUNK_SIZE):
         return ' '.join(translated_chunks)
 
     except Exception as e:
-        print(f"⚠️ Translation error: {e}")
+        print(f"Translation error: {e}")
         return text
