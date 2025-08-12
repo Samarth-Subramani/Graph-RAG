@@ -3,11 +3,11 @@ import torch
 from langchain_huggingface import HuggingFacePipeline  
 
 # -------------------- Load Model --------------------
-local_model_path = "/home/vault/iwia/iwia125h/models/deepseek-8b"
+model_name = ".............."
 
 # load model from device
-tokenizer = AutoTokenizer.from_pretrained(local_model_path)
-model = AutoModelForCausalLM.from_pretrained(local_model_path, device_map="auto")
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
 
 pipe = pipeline(
     "text-generation", 
