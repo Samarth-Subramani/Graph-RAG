@@ -149,13 +149,13 @@ def save_metadata(university_dir, filename, url, content_path):
     else:
         metadata_all = {}
 
-    # ✅ Add/update metadata for this file
+    # Add/update metadata for this file
     metadata_all[filename] = {
         "source_url": url,
         "content_file": content_path
     }
 
-    # ✅ Save updated metadata back to file
+    # Save updated metadata back to file
     with open(meta_path, "w", encoding="utf-8") as f:
         json.dump(metadata_all, f, indent=2)
 
@@ -270,7 +270,7 @@ def extract_pdf_links(soup, base_url, filename, university_dir):
                 for page in doc:
                     full_text += page.get_text()
 
-                # ✅ Validate the extracted text
+                # Validate the extracted text
                 if not is_valid_text(full_text):
                     print(f"                     ❌ Skipped invalid PDF content: {pdf_url}")
                     log_skipped_url(pdf_url, "Invalid PDF text content")
@@ -290,7 +290,7 @@ def extract_pdf_links(soup, base_url, filename, university_dir):
                 print(f"MuPDF error for in-memory PDF {pdf_url}: {mupdf_error}")
                 print(f"Trying PyPDF2 in-memory for: {pdf_url}")
                 text = read_pdf_with_pypdf2_bytes(response.content)
-                # ✅ Validate the fallback text
+                # Validate the fallback text
                 if text and is_valid_text(text):
                     pdf_name = f"{filename}_{i}_pypdf2.txt"
                     text_path = os.path.join(university_dir, sanitize_filename(pdf_name))
