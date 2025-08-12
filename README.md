@@ -5,7 +5,7 @@ The system extracts, processes, and organizes academic web data into a **semanti
 
 ---
 
-## 📌 Overview
+## Overview
 
 The project is divided into three main stages:
 
@@ -15,7 +15,7 @@ The project is divided into three main stages:
 
 ---
 
-## 🗂 Project Structure
+## Project Structure
 
 ├── final_scrapping.py # Academic web scraping with text, table, and PDF extraction
 ├── translator.py # Automatic translation to English
@@ -29,7 +29,7 @@ The project is divided into three main stages:
 
 ---
 
-## 🔍 Pipeline Details
+## Pipeline Details
 
 ### **1. Web Scraping (`final_scrapping.py`)**
 - Iteratively crawls from the [EUMaster4HPC](https://eumaster4hpc.eu/) website and connected academic pages.
@@ -87,6 +87,7 @@ The project is divided into three main stages:
 Install dependencies:
 pip install -r requirements.txt
 
+---
 ## Usage
 ### 1. Scrape Data
 bash
@@ -105,6 +106,7 @@ python semantic_graph.py
 streamlit run graph_app.py
 Access the UI at: http://localhost:8501
 
+---
 ## Example Workflow
 Scraper downloads HTML, CSV, and PDF content → saves as .txt and .csv with metadata.
 
