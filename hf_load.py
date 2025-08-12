@@ -5,7 +5,6 @@ from langchain_huggingface import HuggingFacePipeline
 # -------------------- Load Model --------------------
 model_name = ".............."
 
-# load model from device
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto")
 
