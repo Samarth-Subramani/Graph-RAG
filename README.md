@@ -74,7 +74,7 @@ The project is divided into three main stages:
 
 ---
 
-## ⚙️ Requirements
+## Requirements
 
 - Python 3.10+
 - CUDA-enabled GPU(s)
