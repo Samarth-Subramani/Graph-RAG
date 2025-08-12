@@ -141,7 +141,7 @@ def build_subgraph(csv_dir, subdir, model, threshold=0.85):
                     if triplet_key in seen:
                         continue
                     seen.add(triplet_key)
-                    G.add_node(can_head, label=can_head, subdir=normalize_entity(subdir)) # label can be canonical or original, your choice
+                    G.add_node(can_head, label=can_head, subdir=normalize_entity(subdir)) 
                     G.add_node(can_tail, label=can_tail, subdir=normalize_entity(subdir))
                     G.add_edge(
                         can_head, 
@@ -152,7 +152,7 @@ def build_subgraph(csv_dir, subdir, model, threshold=0.85):
                         source_file=source_file,
                         chunk_id=chunk_id
                     )
-    return G, cluster_map, entity_cluster_map  # (return both for later use!)
+    return G, cluster_map, entity_cluster_map  # (return both for later use)
 
 # -------------------- Sanitize the Graph --------------------
 def sanitize_graph(graph: nx.Graph) -> nx.Graph:
@@ -182,7 +182,7 @@ def sanitize_graph(graph: nx.Graph) -> nx.Graph:
 
 # -------------------- Main --------------------
 def main():
-    csv_input_dir = "/home/vault/iwia/iwia125h/exp_graph_csv"
+    csv_input_dir = ".../graph_csv"
     model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")  
 
     global_graph = nx.MultiDiGraph()
@@ -237,7 +237,7 @@ def main():
     with open("knowledge_graph.json", "w", encoding="utf-8") as f:
         json.dump(nx.readwrite.json_graph.node_link_data(global_graph, edges="links"), f, indent=2, ensure_ascii=False)
 
-    print("\n✅ Knowledge Graph Built")
+    print("\n Knowledge Graph Built")
 
 if __name__ == "__main__":
     main()
