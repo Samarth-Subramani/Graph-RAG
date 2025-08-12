@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer, util
 from hf_load import llm, model, tokenizer
 from semantic_graph import main as graph_main
 from semantic_graph import normalize_entity
-from draw_graph2 import draw_graph
+from draw_graph import draw_graph
 from langchain.chains import GraphQAChain
 from triplet_extraction.extractor import extract_triplets
 import threading
@@ -32,28 +32,28 @@ else:
 # --- Load NLP and embedding models ---
 nlp = spacy.load("en_core_web_sm")
 embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-base_csv_dir = "/home/vault/iwia/iwia125h/exp_graph_csv"  
-graph_dir = "/home/vault/iwia/iwia125h/workspace/graph2"
+base_csv_dir = "..."  
+graph_dir = "..."
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 @st.cache_resource
 def load_graph():
-    with st.spinner("📦 Building or loading knowledge graph..."):
+    with st.spinner("Building or loading knowledge graph..."):
         graphml_path = "eumaster4hpc_subgraph5.graphml"
         if os.path.exists(graphml_path):
             graph = nx.read_graphml(graphml_path)
-            st.success(f"✅ Loaded graph from {graphml_path} with {graph.number_of_nodes()} nodes and {graph.number_of_edges()} edges.")
+            st.success(f"Loaded graph from {graphml_path} with {graph.number_of_nodes()} nodes and {graph.number_of_edges()} edges.")
         else:
-            st.warning("⚠️ GraphML not found. Building graph...")
+            st.warning("GraphML not found. Building graph...")
             graph_main()
             graph = nx.read_graphml(graphml_path)
     return graph
 
-def get_all_subdirs(cluster_dir="/home/vault/iwia/iwia125h"):
+def get_all_subdirs(cluster_dir="..."):
     return sorted([
-        f.replace("_clusters5.json", "")
+        f.replace("_clusters.json", "")
         for f in os.listdir(cluster_dir)
-        if f.endswith("_clusters5.json")
+        if f.endswith("_clusters.json")
     ])
 
 def extract_keywords(question: str):
@@ -82,7 +82,7 @@ def find_best_chunk_for_query(subgraph, base_csv_dir, question, embedder):
     best_chunk = None
     best_subdir = ""
 
-    # 1. Check edges for chunk_ids as before
+    # 1. Check edges for chunk_ids
     for u, v, data in subgraph.edges(data=True):
         subdir = data.get('subdir')
         chunk_id = data.get('chunk_id')
@@ -100,7 +100,7 @@ def find_best_chunk_for_query(subgraph, base_csv_dir, question, embedder):
             best_chunk_id = chunk_id
             best_subdir = subdir
 
-    # 2. If no edge-based chunk found, check nodes for chunk info (if available)
+    # 2. If no edge-based chunk found, check nodes for chunk info
     if not best_chunk_text:
         for node, data in subgraph.nodes(data=True):
             subdir = data.get('subdir')
