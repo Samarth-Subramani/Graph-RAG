@@ -1,0 +1,16 @@
+import json
+from graph_app import load_chunk_text
+
+def test_load_chunk_text(tmp_path):
+    sub = tmp_path / "u"; sub.mkdir()
+    data = [{
+      "source_file": "s.txt",
+      "triplet_output": "t.csv",
+      "url": "https://example.org",
+      "chunks": {"u_a_chunk_1": "hello world"}
+    }]
+    with (sub / "chunk_map.json").open("w", encoding="utf-8") as f:
+        json.dump(data, f)
+    out = load_chunk_text(str(sub), "u_a_chunk_1")
+    assert out["chunk_text"] == "hello world"
+    assert out["url"] == "https://example.org"
